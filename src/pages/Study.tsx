@@ -17,9 +17,17 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-/** 正解＋ダミー3つの4択を作る */
+/**
+ * 正解＋ダミー3つの4択を作る。
+ * ダミーは「同じ種別（単語/フレーズ）」を優先して選び、文の長さや形で
+ * 答えが一目で分かってしまうのを防ぐ。足りなければ別種別で補う。
+ * 呼び出すたびにダミーの抽選と並び順がランダムになる。
+ */
 function buildOptions(item: StudyItem, pool: StudyItem[]): StudyItem[] {
-  const distractors = shuffle(pool.filter((p) => p.id !== item.id)).slice(0, 3);
+  const others = pool.filter((p) => p.id !== item.id);
+  const sameKind = shuffle(others.filter((p) => p.kind === item.kind));
+  const otherKind = shuffle(others.filter((p) => p.kind !== item.kind));
+  const distractors = [...sameKind, ...otherKind].slice(0, 3);
   return shuffle([item, ...distractors]);
 }
 
@@ -31,6 +39,13 @@ export function Study() {
   const genre = getGenre(genreId);
   const category = getCategory(genreId, categoryId);
   const pool = category?.items ?? [];
+
+  // ダミー選択肢はジャンル全体（全シーン横断）の同種別から抽選し、多様で紛らわしくする
+  const distractorPool = useMemo(
+    () => genre?.categories.flatMap((c) => c.items) ?? pool,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [genreId],
+  );
 
   const grade = useStudyStore((s) => s.grade);
   const getStudyQueue = useStudyStore((s) => s.getStudyQueue);
@@ -49,15 +64,18 @@ export function Study() {
   const [correctCount, setCorrectCount] = useState(0);
   const [answeredCount, setAnsweredCount] = useState(0);
   const [pending, setPending] = useState<boolean | null>(null);
+  // 出題ごとに増えるカウンタ。これを選択肢の再計算キーに含めることで、
+  // 同じ項目が再登場しても毎回ダミーと並び順が抽選し直される。
+  const [round, setRound] = useState(0);
 
   const total = initialQueue.length;
   const current = queue[0];
 
-  // クイズ/リスニング用の選択肢（現在の項目ごとに算出）
+  // クイズ/リスニング用の選択肢（出題のたびに再抽選）
   const options = useMemo(
-    () => (current ? buildOptions(current, pool) : []),
+    () => (current ? buildOptions(current, distractorPool) : []),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [current?.id, studyMode],
+    [current?.id, studyMode, round],
   );
 
   if (!genre || !category) {
@@ -82,6 +100,7 @@ export function Study() {
       setCompleted((c) => new Set(c).add(item.id));
     }
     setPending(null);
+    setRound((n) => n + 1);
   }
 
   function handleAnswer(correct: boolean) {
@@ -111,6 +130,7 @@ export function Study() {
               setCompleted(new Set());
               setCorrectCount(0);
               setAnsweredCount(0);
+              setRound((n) => n + 1);
             }}
             className="rounded-xl bg-brand-500 py-3 font-semibold text-white transition hover:bg-brand-600"
           >
