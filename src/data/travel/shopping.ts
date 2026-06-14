@@ -1,0 +1,152 @@
+import type { Category } from '../../types';
+
+// 買い物シーンのオリジナル学習コンテンツ。
+export const shopping: Category = {
+  id: 'shopping',
+  title: '買い物',
+  icon: '🛍️',
+  description: '値段、試着、支払いの表現',
+  items: [
+    {
+      id: 'travel-shopping-001',
+      kind: 'word',
+      en: 'discount',
+      ja: '割引',
+      pron: 'ディスカウント',
+      pos: '名詞',
+      examples: [{ en: 'Is there any discount?', ja: '割引はありますか？' }],
+    },
+    {
+      id: 'travel-shopping-002',
+      kind: 'word',
+      en: 'receipt',
+      ja: 'レシート・領収書',
+      pron: 'レシート',
+      pos: '名詞',
+      examples: [{ en: 'Could I have a receipt?', ja: 'レシートをもらえますか？' }],
+    },
+    {
+      id: 'travel-shopping-003',
+      kind: 'word',
+      en: 'refund',
+      ja: '返金',
+      pron: 'リファンド',
+      pos: '名詞',
+      examples: [
+        { en: 'Can I get a refund for this?', ja: 'これを返金してもらえますか？' },
+      ],
+    },
+    {
+      id: 'travel-shopping-004',
+      kind: 'word',
+      en: 'fitting room',
+      ja: '試着室',
+      pron: 'フィッティング ルーム',
+      pos: '名詞',
+      examples: [
+        { en: 'Where is the fitting room?', ja: '試着室はどこですか？' },
+      ],
+    },
+    {
+      id: 'travel-shopping-005',
+      kind: 'word',
+      en: 'tax-free',
+      ja: '免税',
+      pron: 'タックスフリー',
+      pos: '形容詞',
+      examples: [
+        { en: 'Is this shop tax-free for tourists?', ja: 'この店は旅行者は免税ですか？' },
+      ],
+    },
+    {
+      id: 'travel-shopping-006',
+      kind: 'phrase',
+      en: "I'm just looking, thank you.",
+      ja: '見ているだけです、ありがとう。',
+      examples: [
+        { en: "I'm just looking, thank you.", ja: '見ているだけです、ありがとう。' },
+      ],
+    },
+    {
+      id: 'travel-shopping-007',
+      kind: 'phrase',
+      en: 'How much is this?',
+      ja: 'これはいくらですか？',
+      examples: [{ en: 'How much is this one?', ja: 'これはいくらですか？' }],
+    },
+    {
+      id: 'travel-shopping-008',
+      kind: 'phrase',
+      en: 'Can I try this on?',
+      ja: 'これを試着してもいいですか？',
+      examples: [
+        { en: 'Can I try this on in a medium?', ja: 'これのMサイズを試着してもいいですか？' },
+      ],
+    },
+    {
+      id: 'travel-shopping-009',
+      kind: 'phrase',
+      en: 'Do you have this in a different size?',
+      ja: '別のサイズはありますか？',
+      examples: [
+        {
+          en: 'Do you have this in a larger size?',
+          ja: 'これの大きいサイズはありますか？',
+        },
+      ],
+    },
+    {
+      id: 'travel-shopping-010',
+      kind: 'phrase',
+      en: 'Do you have this in another color?',
+      ja: '別の色はありますか？',
+      examples: [
+        { en: 'Do you have this in another color?', ja: '別の色はありますか？' },
+      ],
+    },
+    {
+      id: 'travel-shopping-011',
+      kind: 'phrase',
+      en: 'Can I pay by credit card?',
+      ja: 'クレジットカードで払えますか？',
+      examples: [
+        { en: 'Can I pay by credit card?', ja: 'クレジットカードで払えますか？' },
+      ],
+    },
+    {
+      id: 'travel-shopping-012',
+      kind: 'phrase',
+      en: "It's a bit too expensive for me.",
+      ja: '私には少し高すぎます。',
+      examples: [
+        {
+          en: "It's a bit too expensive for me. Do you have a cheaper one?",
+          ja: '私には少し高すぎます。もっと安いものはありますか？',
+        },
+      ],
+    },
+    {
+      id: 'travel-shopping-013',
+      kind: 'phrase',
+      en: "I'll take it.",
+      ja: 'これにします（買います）。',
+      examples: [{ en: "Okay, I'll take it.", ja: 'では、これにします。' }],
+    },
+    {
+      id: 'travel-shopping-014',
+      kind: 'phrase',
+      en: 'Could you gift-wrap this?',
+      ja: 'これをプレゼント用に包んでもらえますか？',
+      examples: [
+        { en: 'Could you gift-wrap this, please?', ja: 'これをプレゼント用に包んでもらえますか？' },
+      ],
+    },
+    {
+      id: 'travel-shopping-015',
+      kind: 'phrase',
+      en: 'Where do I pay?',
+      ja: 'どこで支払えばいいですか？',
+      examples: [{ en: 'Excuse me, where do I pay?', ja: 'すみません、どこで支払えばいいですか？' }],
+    },
+  ],
+};
